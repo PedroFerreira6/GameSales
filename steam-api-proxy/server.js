@@ -13,6 +13,14 @@ app.get('/getAppList', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch data from Steam API' });
   }
 });
+app.get('/jogosemsaldo', async (req, res) => {
+  try {
+    const response = await axios.get('https://store.steampowered.com/api/featuredcategories/?l=portuguese');
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch data from Steam API' });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);

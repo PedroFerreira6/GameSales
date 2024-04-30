@@ -1,24 +1,6 @@
-console.log('Init App!');
-
-urlSteam()
-
-function pedido_GetSTEAM(url, callback){
-    let xhr = new XHttpRequest();
-    xhr.open("GET", url);
-    xhr.addEventListener('load', callback);
-    xhr.send();
-}
-
-function urlSteam(){
-    let urlSteamSales = 'https://store.steampowered.com/api/featuredcategories/?l=portuguese' 
-    console.log(" teste url "+urlSteamSales);
-
-    pedido_GetSTEAM(urlSteamSales, showGames)
-
-}
-
-function showGames(){
-    console.log(this.responseText);
-    let games = JSON.parse(this.responseText)   
-}
-
+// Make a GET request to your Node.js server endpoint
+$.get('http://localhost:3000/jogosemsaldo', function(data) {
+  // Handle the response data (list of games on sale)
+  // You can display this data on your website however you like
+  console.log(data);
+});

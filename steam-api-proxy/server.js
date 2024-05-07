@@ -7,9 +7,9 @@ const port = process.env.PORT || 5002;
 app.use(express.json());
 app.use(cors());
 
-app.get('/getAppList', async (req, res) => {
+app.get('/getGameDetails', async (req, res) => {
   try {
-    const response = await axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/');
+    const response = await axios.get('https://store.steampowered.com/api/appdetails?appids=${id}');
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch data from Steam API' });

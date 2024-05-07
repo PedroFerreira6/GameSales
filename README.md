@@ -1,5 +1,6 @@
 # GameSales
 Feito por: Pedro Ferreira, Renato Capitão e Otaniel Junior
+/r/n
 GameSales é um website de promoção de jogos(Steam e EpicGames), jogos especialmente para computador.
 Nele vai aparecer os jogos e as promoções respetivas, tambem vamos criar um sistema te publicar um comentario a partir de uma api para outra plataforma/website Externo.
 

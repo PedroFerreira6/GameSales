@@ -6,7 +6,7 @@ xhr.onreadystatechange = function() {
       var data = JSON.parse(xhr.responseText);
       var newreleases = data.new_releases.items.slice(0, 6); // Escolher os primeiros 6
       
-      var newreleases = document.querySelector('#newreleases'); // container
+      var newreleasescont = document.querySelector('#newreleases'); // container
       
       
       newreleases.forEach(function(item) {
@@ -33,6 +33,7 @@ xhr.onreadystatechange = function() {
         colDiv2.appendChild(colDiv3)
         colDiv2.appendChild(colDiv4)
         colDiv.appendChild(colDiv)
+        newreleasescont.appendChild(colDiv)
         
 
 

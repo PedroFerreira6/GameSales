@@ -50,7 +50,7 @@ xhr.onreadystatechange = function () {
 
           var categorySpan = document.createElement('span');
           categorySpan.classList.add('category');
-          categorySpan.textContent = 'Ação'; 
+          categorySpan.textContent = item.name; 
 
           var h4 = document.createElement('h4');
           h4.textContent = item.name;

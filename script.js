@@ -1,9 +1,9 @@
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://gamesales-production.up.railway.app/jogosemsaldo', true);
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === XMLHttpRequest.DONE) {
-    if (xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText);
+var xhr2 = new XMLHttpRequest();
+xhr2.open('GET', 'https://gamesales-production.up.railway.app/jogosemsaldo', true);
+xhr2.onreadystatechange = function() {
+  if (xhr2.readyState === XMLHttpRequest.DONE) {
+    if (xhr2.status === 200) {
+      var data = JSON.parse(xhr2.responseText);
       var newreleases = data.new_releases.items.slice(0, 6); // Escolher os primeiros 6
       
       var newreleasescont = document.querySelector('#newreleases'); // container
@@ -102,9 +102,9 @@ xhr.onreadystatechange = function() {
       });
 
     } else {
-      console.error('Error fetching data:', xhr.status);
+      console.error('Error fetching data:', xhr2.status);
     }
   }
 };
-xhr.send();
+xhr2.send();
 

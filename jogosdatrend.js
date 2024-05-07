@@ -1,8 +1,7 @@
 var dataSteam = [];
 //coletar informaçoes do api
-$.get('https://steam-production.up.railway.app/jogosemsaldo', function(data) {
+$.get('https://gamesales-production.up.railway.app/jogosemsaldo', function(data) {
 
-        
   dataFuncPush(data);
     
     

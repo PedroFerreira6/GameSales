@@ -32,8 +32,9 @@ xhr.onreadystatechange = function() {
         colDiv3.appendChild(a)
         colDiv2.appendChild(colDiv3)
         colDiv2.appendChild(colDiv4)
-        colDiv.appendChild(colDiv)
+        colDiv.appendChild(colDiv2)
         newreleasescont.appendChild(colDiv)
+        
         
 
 

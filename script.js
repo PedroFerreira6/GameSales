@@ -7,11 +7,13 @@ xhr2.onreadystatechange = function() {
       var newreleases = data.new_releases.items.slice(0, 6); // Escolher os primeiros 6
       
       var newreleasescont = document.querySelector('#newreleases'); // container
+      let newrow=document.createElement('row');
+
       
       
       newreleases.forEach(function(item) {
         let colDiv = document.createElement('div');
-        colDiv.classList.add('col-lg-2 col-md-6 col-sm-6');
+        colDiv.setAttribute('src','col-lg-2 col-md-6 col-sm-6');
         let colDiv2 = document.createElement('div');
         colDiv2.classList.add('item');
         let colDiv3 = document.createElement('div');
@@ -24,20 +26,18 @@ xhr2.onreadystatechange = function() {
         colDiv4.classList.add('down-content');
         let h4 = document.createElement('div');
         let a2 = document.createElement('a');
+        a2.textContent="Explore"
         a2.setAttribute('href',"product-details.html?id="+item.id);
         h4.textContent=item.name
 
         colDiv4.appendChild(a2)
         colDiv4.appendChild(h4)
         colDiv3.appendChild(a)
+        colDiv3.appendChild(img)
         colDiv2.appendChild(colDiv3)
         colDiv2.appendChild(colDiv4)
         colDiv.appendChild(colDiv2)
-        newreleasescont.appendChild(colDiv)
-        
-        
-
-
+        newrow.appendChild(colDiv)
 
 /*<div class="col-lg-2 col-md-6 col-sm-6">
           <div class="item">
@@ -100,6 +100,7 @@ xhr2.onreadystatechange = function() {
         // Append the created elements to the container
         trendingContainer.appendChild(colDiv);*/
       });
+      newreleasescont.appendChild(newrow)
 
     } else {
       console.error('Error fetching data:', xhr2.status);

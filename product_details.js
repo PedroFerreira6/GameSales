@@ -7,9 +7,10 @@ function getQueryParam(name) {
 
 var gameId = getQueryParam('id');
 console.log('Game ID:', gameId); // Check if gameId is correctly obtained from the URL
-
 if (!gameId) {
     console.error('Game ID was not found in the URL');
+    window.location.href = "index.html";
+
 } else {
     // Function to fetch game data
     function fetchGameData() {
@@ -19,7 +20,7 @@ if (!gameId) {
                 if (xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
                     console.log('Server Response:', data); // Check the server response
-                    var dados = data[gameId].data;
+                    var dados = data;
                     // Access the header_image URL from the data object
                     var headerImage = dados.header_image;
                     console.log('Header Image URL:', headerImage); // Check if headerImage is correctly obtained
@@ -51,19 +52,56 @@ if (!gameId) {
                     id_game.textContent = gameId;
                     image.setAttribute('src', headerImage);
 
+
+                    //Géneros
                     var container = document.getElementById('genresContainer');
 
                     gameData = dados.genres;
 
-                    // Loop through each genre and create an <a> element for it
                     gameData.forEach(function (genre) {
                         var genreLink = document.createElement('a');
-                        genreLink.href = '#'; // Set the href attribute, you can modify it based on your requirement
-                        genreLink.textContent = genre.description + ", "; // Set the text content of the <a> element
-                        container.appendChild(genreLink); // Append the <a> element to the container
+                        genreLink.href = '#';
+                        genreLink.textContent = genre.description + ", ";
+                        container.appendChild(genreLink);
+                    });
+
+                    //TAGS
+
+                    var container = document.getElementById('tagsmm');
+
+                    gameCate = dados.categories;
+
+                    gameCate.forEach(function (genre) {
+                        var genreLink = document.createElement('a');
+                        genreLink.href = '#';
+                        genreLink.textContent = genre.description + ", ";
+                        container.appendChild(genreLink);
+                    });
+
+                    ////
+                    var shordesc = document.querySelector("#shortdesc")
+                    shortdesc.textContent = dados.short_description
+
+
+                    //Screenshots
+                    gamescre = dados.screenshots;
+                    var reviews = document.querySelector("#reviews")
+                    gamescre.forEach(function (genre) {
+                        var genreLink = document.createElement('img');
+                        genreLink.setAttribute('src', genre.path_full)
+                        reviews.appendChild(genreLink);
+                    });
+
+
+                    var botaosteam = document.querySelector("#ir_steam");
+                    botaosteam.addEventListener('click', function (event) {
+                        event.preventDefault(); // Prevent the default behavior of the button
+                        window.location.href = "https://store.steampowered.com/app/" + gameId;
                     });
                 } else {
                     console.error('Error fetching game details:', xhr.status);
+                    window.location.href = "index.html";
+
                 }
             }
         };

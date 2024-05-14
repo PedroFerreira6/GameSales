@@ -43,6 +43,7 @@ xhr3.onreadystatechange = function () {
     }
 }else{
     console.log("Estado atual do XMLHttpRequest:", xhr.readyState);
+    //ez commit
 }
 }
 xhr3.send();

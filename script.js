@@ -4,103 +4,69 @@ xhr2.onreadystatechange = function() {
   if (xhr2.readyState === XMLHttpRequest.DONE) {
     if (xhr2.status === 200) {
       var data = JSON.parse(xhr2.responseText);
-      var newreleases = data.new_releases.items.slice(0, 6); // Escolher os primeiros 6
+      var newreleases = data.new_releases.items.slice(0, 6); // Choose the first 6 items
       
-      var newreleasescont = document.querySelector('#newreleases'); // container
-      let newrow=document.createElement('row');
+      var newreleasescont = document.getElementById('newreleases'); // Container
 
-      
-      
+      var rowDiv = document.createElement('div');
+      rowDiv.classList.add('row');
+
       newreleases.forEach(function(item) {
+        // Create elements
         let colDiv = document.createElement('div');
-        colDiv.setAttribute('src','col-lg-2 col-md-6 col-sm-6');
-        let colDiv2 = document.createElement('div');
-        colDiv2.classList.add('item');
-        let colDiv3 = document.createElement('div');
-        colDiv3.classList.add('thumb');
+        colDiv.className = 'col-lg-2 col-md-6 col-sm-6'; // Set class name
+        
+        let itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        
+        let thumbDiv = document.createElement('div');
+        thumbDiv.className = 'thumb';
+        
         let a = document.createElement('a');
-        a.setAttribute('href',"product-details.html?id="+item.id);
-        let img= document.createElement('img');
-        img.setAttribute('src',item.header_image);
-        let colDiv4 = document.createElement('div');
-        colDiv4.classList.add('down-content');
-        let h4 = document.createElement('div');
-        let a2 = document.createElement('a');
-        a2.textContent="Explore"
-        a2.setAttribute('href',"product-details.html?id="+item.id);
-        h4.textContent=item.name
-
-        colDiv4.appendChild(a2)
-        colDiv4.appendChild(h4)
-        colDiv3.appendChild(a)
-        colDiv3.appendChild(img)
-        colDiv2.appendChild(colDiv3)
-        colDiv2.appendChild(colDiv4)
-        colDiv.appendChild(colDiv2)
-        newrow.appendChild(colDiv)
-
-/*<div class="col-lg-2 col-md-6 col-sm-6">
-          <div class="item">
-            <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/top-game-06.jpg" alt=""></a>
-            </div>
-            <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
-                <a href="product-details.html">Explore</a>
-            </div>
-          </div>
-        </div>*/
-
-
-
-
-
-        /*
-        var itemDiv = document.createElement('div');
-        itemDiv.classList.add('item');
+        a.setAttribute('href', "product-details.html?id=" + item.id);
         
-        var thumbDiv = document.createElement('div');
-        thumbDiv.classList.add('thumb');
+        let img = document.createElement('img');
+        img.setAttribute('src', item.header_image);
         
-        var img = document.createElement('img');
-        img.setAttribute('src', item.large_capsule_image);
-        img.setAttribute('alt', item.name);
+        let downContentDiv = document.createElement('div');
+        downContentDiv.className = 'down-content';
         
-        var spanPrice = document.createElement('span');
-        spanPrice.classList.add('price');
-        spanPrice.innerHTML = '<em>$' + item.ori + '</em>$' + item.original_price;
-        
-        thumbDiv.appendChild(img);
-        thumbDiv.appendChild(spanPrice);
-        
-        var downContentDiv = document.createElement('div');
-        downContentDiv.classList.add('down-content');
-        
-        var categorySpan = document.createElement('span');
-        categorySpan.classList.add('category');
-        categorySpan.textContent = 'Action';
-        
-        var h4 = document.createElement('h4');
+        let h4 = document.createElement('h4');
         h4.textContent = item.name;
         
-        var link = document.createElement('a');
-        link.setAttribute('href', 'product-details.html');
-        link.innerHTML = '<i class="fa fa-shopping-bag"></i>';
-        
+        let bagIcon = document.createElement('i');
+        bagIcon.className = 'fa fa-shopping-bag';
+
+        let link = document.createElement('a');
+        link.setAttribute('href', 'product-details.html?id=' + item.id);
+        link.appendChild(bagIcon);
+
+        let categorySpan = document.createElement('span');
+        categorySpan.classList.add('category');
+        categorySpan.textContent = item.name; 
+
+        let promoSpan = document.createElement('span');
+        promoSpan.classList.add('price');
+        promoSpan.innerHTML = '<em>$0.00</em>$0.00';
+
+        // Append elements
         downContentDiv.appendChild(categorySpan);
         downContentDiv.appendChild(h4);
         downContentDiv.appendChild(link);
+        downContentDiv.appendChild(promoSpan);
+        
+        thumbDiv.appendChild(a);
+        thumbDiv.appendChild(img);
         
         itemDiv.appendChild(thumbDiv);
         itemDiv.appendChild(downContentDiv);
         
         colDiv.appendChild(itemDiv);
         
-        // Append the created elements to the container
-        trendingContainer.appendChild(colDiv);*/
+        rowDiv.appendChild(colDiv);
       });
-      newreleasescont.appendChild(newrow)
+
+      newreleasescont.appendChild(rowDiv);
 
     } else {
       console.error('Error fetching data:', xhr2.status);
@@ -108,4 +74,3 @@ xhr2.onreadystatechange = function() {
   }
 };
 xhr2.send();
-

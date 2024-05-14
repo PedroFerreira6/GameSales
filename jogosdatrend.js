@@ -4,7 +4,7 @@ xhr.onreadystatechange = function () {
   if (xhr.readyState === XMLHttpRequest.DONE) {
     if (xhr.status === 200) {
       var data = JSON.parse(xhr.responseText);
-      var topSellers = data.top_sellers.items.slice(0, 9); // Seleciona apenas alguns dos elementos dos topsellers
+      var topSellers = data.top_sellers.items.slice(0, 10); // Seleciona apenas alguns dos elementos dos topsellers
 
       // Filtra os itens duplicados com base nos seus IDs
       var uniqueTopSellers = topSellers.filter((item, index, self) =>

@@ -10,12 +10,14 @@ app.use(cors());
 app.get('/getGameDetails/:gameId', async (req, res) => {
   const gameId = req.params.gameId;
   try {
-    const response = await axiosInstance.get(`https://store.steampowered.com/api/appdetails?appids=${gameId}`);
+    const response = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${gameId}`);
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch data from Steam API' });
   }
 });
+
+
 app.get('/jogosemsaldo', async (req, res) => {
   try {
     const response = await axios.get('https://store.steampowered.com/api/featuredcategories/?l=portuguese');

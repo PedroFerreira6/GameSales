@@ -75,6 +75,7 @@ xhr.onreadystatechange = function () {
 
       // Anexa os elementos criados ao container
       trendingContainer.appendChild(rowDiv);
+      console.log("Estado atual do XMLHttpRequest:", xhr.readyState);
     } else {
       console.error('Erro ao buscar os dados:', xhr.status);
     }

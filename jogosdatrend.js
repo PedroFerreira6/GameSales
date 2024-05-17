@@ -56,7 +56,7 @@ xhr.onreadystatechange = function () {
           h4.textContent = item.name;
 
           var link = document.createElement('a');
-          link.setAttribute('href', '/product-details.html?id='+item.id);
+          link.setAttribute('href', 'https://pedroferreira6.github.io/GameSales/index.html/product-details.html?id='+item.id);
           link.innerHTML = '<i class="fa fa-shopping-bag"></i>';
           
 

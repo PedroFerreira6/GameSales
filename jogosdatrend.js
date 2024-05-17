@@ -4,27 +4,27 @@ xhr.onreadystatechange = function () {
   if (xhr.readyState === XMLHttpRequest.DONE) {
     if (xhr.status === 200) {
       var data = JSON.parse(xhr.responseText);
-      var topSellers = data.top_sellers.items.slice(0, 10); // Seleciona apenas alguns dos elementos dos topsellers
+      var topSellers = data.top_sellers.items.slice(0, 9); // Select only some of the top sellers
 
-      // Filtra os itens duplicados com base nos seus IDs
-      var uniqueTopSellers = topSellers.filter((item, index, self) =>
-        index === self.findIndex((t) => (
-          t.id === item.id
-        ))
-      );
+      // Maintain an array of items already added to ensure uniqueness
+      var addedItems = [];
 
-      var trendingContainer = document.getElementById('trendingContainer'); // Obtém o elemento do container
+      var trendingContainer = document.getElementById('trendingContainer'); // Get the container element
       var rowDiv = document.createElement('div');
       rowDiv.classList.add('row');
 
-      // Loop através de cada top seller único
-      uniqueTopSellers.forEach(function (item) {
-        // adiciona 2 casa decimais ao preço
-        if (item.name != "Steam Deck") {
+      // Loop through each top seller
+      topSellers.forEach(function (item) {
+        // Check if the item is not already added and it's not the "Steam Deck"
+        if (!addedItems.includes(item.id) && item.name !== "Steam Deck") {
+          // Add the item to the added items list
+          addedItems.push(item.id);
+
+   
           var finalPrice = (item.final_price / 100).toFixed(2);
           var originalPrice = (item.original_price / 100).toFixed(2);
 
-          // Cria os elementos HTML necessários
+      
           var colDiv = document.createElement('div');
           colDiv.classList.add('col-lg-3', 'col-md-6');
 
@@ -73,11 +73,11 @@ xhr.onreadystatechange = function () {
         }
       });
 
-      // Anexa os elementos criados ao container
+      // Append the created elements to the container
       trendingContainer.appendChild(rowDiv);
-      console.log("Estado atual do XMLHttpRequest:", xhr.readyState);
+      console.log("Current state of the XMLHttpRequest:", xhr.readyState);
     } else {
-      console.error('Erro ao buscar os dados:', xhr.status);
+      console.error('Error fetching data:', xhr.status);
     }
   }
 };

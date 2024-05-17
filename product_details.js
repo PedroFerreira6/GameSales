@@ -78,9 +78,7 @@ if (!gameId) {
                         container.appendChild(genreLink);
                     });
 
-                    ////
-                    var shordesc = document.querySelector("#shortdesc")
-                    shortdesc.textContent = dados.short_description
+                
 
 
                     //Screenshots
@@ -97,6 +95,33 @@ if (!gameId) {
                     botaosteam.addEventListener('click', function (event) {
                         event.preventDefault(); // Prevent the default behavior of the button
                         window.location.href = "https://store.steampowered.com/app/" + gameId;
+                    });
+
+
+                    //TRAILERS
+                    gamescre = dados.movies;
+                    var trailers = document.querySelector("#trailers");
+                    
+                    gamescre.forEach(function (genre) {
+                        // Create a new row for each trailer
+                        var rowDiv = document.createElement('div');
+                        rowDiv.classList.add('row');
+                    
+                        var genreLink = document.createElement('iframe');
+                        genreLink.setAttribute('src', genre.webm.max);
+                        genreLink.setAttribute('width', '100%'); // Set the width to 100% to fill the container
+                        genreLink.setAttribute('height', '500px'); // Adjust the height as needed
+                    
+                        // Create a column for the trailer
+                        var colDiv = document.createElement('div');
+                        colDiv.classList.add('col-12'); // Make the column occupy the entire row width
+                        colDiv.appendChild(genreLink);
+                    
+                        // Append the column to the row
+                        rowDiv.appendChild(colDiv);
+                    
+                        // Append the row to the trailers container
+                        trailers.appendChild(rowDiv);
                     });
                 } else {
                     console.error('Error fetching game details:', xhr.status);

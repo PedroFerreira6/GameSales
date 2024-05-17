@@ -9,7 +9,6 @@ var gameId = getQueryParam('id');
 console.log('Game ID:', gameId); // Check if gameId is correctly obtained from the URL
 if (!gameId) {
     console.error('Game ID was not found in the URL');
-    window.location.href = "index.html";
 
 } else {
     // Function to fetch game data
@@ -125,7 +124,7 @@ if (!gameId) {
                     });
                 } else {
                     console.error('Error fetching game details:', xhr.status);
-                    window.location.href = "index.html";
+                    
 
                 }
             }

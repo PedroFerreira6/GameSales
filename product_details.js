@@ -13,7 +13,7 @@ if (!gameId) {
 } else {
     // Function to fetch game data
     function fetchGameData() {
-        xhr.open('GET', 'http://gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
+        xhr.open('GET', 'https://gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {

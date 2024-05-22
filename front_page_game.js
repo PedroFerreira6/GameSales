@@ -33,6 +33,8 @@ xhr3.onreadystatechange = function () {
                     rImageSale.textContent = "-" + sale + "%"
                     if (sale <= 0) {
                         rImageSale.setAttribute('style', "visibility: hidden;");
+                    }else{
+                        rImageSale.setAttribute('style', "visibility: none;");
                     }
                 }
             });

@@ -9,12 +9,11 @@ var gameId = getQueryParam('id');
 console.log('Game ID:', gameId); // Check if gameId is correctly obtained from the URL
 if (!gameId) {
     console.error('Game ID was not found in the URL');
-    window.location.href = "index.html";
 
 } else {
     // Function to fetch game data
     function fetchGameData() {
-        xhr.open('GET', 'http://gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
+        xhr.open('GET', 'https://gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -66,7 +65,6 @@ if (!gameId) {
                     });
 
                     //TAGS
-
                     var container = document.getElementById('tagsmm');
 
                     gameCate = dados.categories;
@@ -78,10 +76,6 @@ if (!gameId) {
                         container.appendChild(genreLink);
                     });
 
-                    ////
-                    var shordesc = document.querySelector("#shortdesc")
-                    shortdesc.textContent = dados.short_description
-
 
                     //Screenshots
                     gamescre = dados.screenshots;
@@ -90,17 +84,50 @@ if (!gameId) {
                         var genreLink = document.createElement('img');
                         genreLink.setAttribute('src', genre.path_full)
                         reviews.appendChild(genreLink);
+                        genreLink.style = "margin-bottom:10px;"
                     });
 
-
+                    // BOTAO COMPRAR NA STEAM
                     var botaosteam = document.querySelector("#ir_steam");
                     botaosteam.addEventListener('click', function (event) {
                         event.preventDefault(); // Prevent the default behavior of the button
                         window.location.href = "https://store.steampowered.com/app/" + gameId;
                     });
+
+
+                    //TRAILERS
+                    var trailers = document.querySelector("#trailers");
+                    var movies = dados.movies;
+
+                   
+                    var rowDiv = document.createElement('div');
+                    rowDiv.classList.add('row');
+
+                    movies.forEach(function (movie) {
+                        
+                        var trailerUrl = movie.webm.max;
+                        if (trailerUrl.startsWith('http:')) {
+                            trailerUrl = trailerUrl.replace('http:', 'https:');
+                        }
+
+                        var genreLink = document.createElement('iframe');
+                        genreLink.setAttribute('src', trailerUrl);
+                        genreLink.setAttribute('width', '100%'); 
+                        genreLink.setAttribute('height', '500px'); 
+
+                       
+                        var colDiv = document.createElement('div');
+                        colDiv.classList.add('col-12'); 
+                        colDiv.appendChild(genreLink);
+
+                      
+                        rowDiv.appendChild(colDiv);
+                    });
+                    
+                    trailers.appendChild(rowDiv);
                 } else {
                     console.error('Error fetching game details:', xhr.status);
-                    window.location.href = "index.html";
+
 
                 }
             }

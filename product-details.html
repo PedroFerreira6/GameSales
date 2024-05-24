@@ -49,16 +49,15 @@ https://templatemo.com/tm-589-lugx-gaming
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="" style="width: 158px;">
+                        <img src="assets/image.png" alt="" style="width: 158px;">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="shop.html">Our Shop</a></li>
-                      <li><a href="product-details.html" class="active">Product Details</a></li>
-                      <li><a href="contact.html">Contact Us</a></li>
-                      <li><a href="#">Sign In</a></li>
+                      <li><a href="index.html" class="active">Home</a></li>
+                      <li><a href="shop.html">Vizualizar Jogos mais populares</a></li>
+                      <li id="lilink"><a href="favoritos.html" id="favlink">Seus Favoritos</a></li>
+                      <li><a href="./login_register/login.html" id="signin">Sign In</a></li>
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -94,8 +93,8 @@ https://templatemo.com/tm-589-lugx-gaming
           <h4 id="nome2"></h4>
           <span id="price" class="price"></span>
           <p id="about_game"></p>
-          <form id="qty" action="#">
-            <button id="ir_steam"><i class="fa fa-shopping-bag"></i> Buy on Steam</button>
+          <form id="qty">
+            <button id="ir_steam"><i class="fa fa-shopping-bag"></i> Buy on Steam</button> <button id="favorite" style="background-color: transparent;"><i id="favicon" style="color:rgb(234, 251, 48);" class="fa-regular fa-star"></i></button>
           </form>
           <ul>
             <li><span>Game ID:</span> <span id="game_id"></span></li>
@@ -158,6 +157,7 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
-  <script src="./product_details.js"></script>
+  <script type="module" src="./session.js"></script>
+  <script type="module" src="./product_details.js"></script>
   </body>
 </html>

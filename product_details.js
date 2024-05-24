@@ -6,23 +6,23 @@ function getQueryParam(name) {
 }
 
 var gameId = getQueryParam('id');
-console.log('Game ID:', gameId); // Check if gameId is correctly obtained from the URL
+console.log('Game ID:', gameId);  
 if (!gameId) {
     console.error('Game ID was not found in the URL');
 
 } else {
-    // Function to fetch game data
+  
     function fetchGameData() {
-        xhr.open('GET', 'https://gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
+        xhr.open('GET', 'https:gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
-                    console.log('Server Response:', data); // Check the server response
+                    console.log('Server Response:', data); 
                     var dados = data;
-                    // Access the header_image URL from the data object
+                
                     var headerImage = dados.header_image;
-                    console.log('Header Image URL:', headerImage); // Check if headerImage is correctly obtained
+                    console.log('Header Image URL:', headerImage); 
                     var image = document.getElementById('mainImg');
                     var nome = document.querySelector("#nome1");
                     var nome1 = document.querySelector("#nome2");
@@ -34,7 +34,7 @@ if (!gameId) {
                     if (dados.price_overview && dados.price_overview.final_formatted) {
                         price.textContent = dados.price_overview.final_formatted;
                     } else {
-                        // Retry fetching the data
+                         
                         if (retryCount < maxRetries) {
                             retryCount++;
                             console.log('Retry:', retryCount);
@@ -42,8 +42,7 @@ if (!gameId) {
                             return;
                         } else {
                             console.error('Max retries reached, final_formatted not available');
-                            // You can handle this scenario, for example, redirecting or displaying an error message
-                            // For now, let's refresh the page
+                          
                             location.reload();
                         }
                     }
@@ -55,7 +54,7 @@ if (!gameId) {
                     //Géneros
                     var container = document.getElementById('genresContainer');
 
-                    gameData = dados.genres;
+                    var gameData = dados.genres;
 
                     gameData.forEach(function (genre) {
                         var genreLink = document.createElement('a');
@@ -67,7 +66,7 @@ if (!gameId) {
                     //TAGS
                     var container = document.getElementById('tagsmm');
 
-                    gameCate = dados.categories;
+                    var gameCate = dados.categories;
 
                     gameCate.forEach(function (genre) {
                         var genreLink = document.createElement('a');
@@ -78,7 +77,7 @@ if (!gameId) {
 
 
                     //Screenshots
-                    gamescre = dados.screenshots;
+                    var gamescre = dados.screenshots;
                     var reviews = document.querySelector("#reviews")
                     gamescre.forEach(function (genre) {
                         var genreLink = document.createElement('img');
@@ -87,11 +86,11 @@ if (!gameId) {
                         genreLink.style = "margin-bottom:10px;"
                     });
 
-                    // BOTAO COMPRAR NA STEAM
+                     //BOTAO COMPRAR NA STEAM
                     var botaosteam = document.querySelector("#ir_steam");
                     botaosteam.addEventListener('click', function (event) {
-                        event.preventDefault(); // Prevent the default behavior of the button
-                        window.location.href = "https://store.steampowered.com/app/" + gameId;
+                        event.preventDefault();  
+                        window.location.href = "https:store.steampowered.com/app/" + gameId;
                     });
 
 
@@ -133,14 +132,97 @@ if (!gameId) {
             }
         };
 
-        // Send the request
+         
         xhr.send();
     }
 
     var retryCount = 0;
-    var maxRetries = 5; // Maximum number of retries
-    var retryInterval = 1000; // Retry interval in milliseconds
+    var maxRetries = 5;  //Maximum number of retries
+    var retryInterval = 1000;  //Retry interval in milliseconds
 
-    // Start fetching game data
+     //Start fetching game data
     fetchGameData();
 }
+
+ import { database } from './login_register/js/firebase-config.js';
+ import { ref, push, get, child, orderByChild, equalTo, remove, set } from "https:www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+
+
+
+var favbutton=document.getElementById('favorite');
+ favbutton.addEventListener('click', function () {
+    event.preventDefault();
+
+    // Get UID from localStorage
+    const uid = localStorage.getItem('uid');
+    if (!uid) {
+        console.error("User is not logged in");
+        return;
+    }
+
+    // Get the game ID
+    const gameId = getQueryParam('id');
+    if (!gameId) {
+        console.error('Game ID was not found in the URL');
+        return;
+    }
+
+    // Toggle favorite game
+    const userRef = ref(database, `users/${uid}/favorites`);
+    get(child(userRef, gameId)).then((snapshot) => {
+        if (snapshot.exists()) {
+            // Game is already in favorites, remove it
+            remove(child(userRef, gameId))
+                .then(() => {
+                    alert("Jogo removido dos favoritos");
+                    favicon.setAttribute('class','fa-regular fa-star')
+                })
+                .catch((error) => {
+                    console.error("Error removing game from favorites:", error);
+                });
+        } else {
+            // Game is not in favorites, add it
+            set(child(userRef, gameId), true)
+                .then(() => {
+                    alert("Jogo adicionado aos favoritos");
+                    favicon.setAttribute('class','fa-solid fa-star') // Change icon to solid
+                })
+                .catch((error) => {
+                    console.error("Error adding game to favorites:", error);
+                });
+        }
+    }).catch((error) => {
+        console.error("Error checking favorite game:", error);
+    });
+});
+
+
+
+ var favicon = document.getElementById('favicon');
+//Update favorite button color on page load
+document.addEventListener('DOMContentLoaded', function () {
+    // Get UID from localStorage
+    const uid = localStorage.getItem('uid');
+    if (!uid) {
+        console.error("User is not logged in");
+        return;
+    }
+
+    // Get the game ID
+    const gameId = getQueryParam('id');
+    if (!gameId) {
+        console.error('Game ID was not found in the URL');
+        return;
+    }
+
+    // Check if the game is in favorites
+    const userRef = ref(database, `users/${uid}/favorites`);
+    get(child(userRef, gameId)).then((snapshot) => {
+        // If the game is in favorites, change the icon to solid
+        if (snapshot.exists()) {
+            favicon.classList.add("fa-solid");
+        }
+    }).catch((error) => {
+        console.error("Error checking favorite game:", error);
+    });
+});

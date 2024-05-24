@@ -11,17 +11,37 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .signin-content {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
 
     <div class="main">
 
-        <!-- Sing in  Form -->
+        <!-- Sign in Form -->
         <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
+                    <!-- Back Button -->
+                    <button onclick="window.location.href='../index.html'" class="back-button">Back</button>
+
                     <div class="signin-image">
-                        <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
+                        <figure><img src="images/signin-image.jpg" alt="sign up image"></figure>
                         <a href="register.html" class="signup-image-link">Create an account</a>
                     </div>
 
@@ -36,22 +56,12 @@
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
                             </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                            </div>
+
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                <input type="button" name="signin" id="signin" class="form-submit" value="Log in"/>
                             </div>
                         </form>
-                        <div class="social-login">
-                            <span class="social-label">Or login with</span>
-                            <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                            </ul>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -61,6 +71,6 @@
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/login_register.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

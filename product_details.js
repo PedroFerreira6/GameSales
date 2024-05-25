@@ -55,7 +55,7 @@ if (!gameId) {
                     //Géneros
                     var container = document.getElementById('genresContainer');
 
-                    gameData = dados.genres;
+                    var gameData = dados.genres;
 
                     gameData.forEach(function (genre) {
                         var genreLink = document.createElement('a');
@@ -67,7 +67,7 @@ if (!gameId) {
                     //TAGS
                     var container = document.getElementById('tagsmm');
 
-                    gameCate = dados.categories;
+                    var gameCate = dados.categories;
 
                     gameCate.forEach(function (genre) {
                         var genreLink = document.createElement('a');
@@ -78,7 +78,7 @@ if (!gameId) {
 
 
                     //Screenshots
-                    gamescre = dados.screenshots;
+                    var gamescre = dados.screenshots;
                     var reviews = document.querySelector("#reviews")
                     gamescre.forEach(function (genre) {
                         var genreLink = document.createElement('img');

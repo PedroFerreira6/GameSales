@@ -103,7 +103,7 @@ if (!gameId) {
                         genreLink.setAttribute('src', trailerUrl);
                         genreLink.setAttribute('width', '100%'); 
                         genreLink.setAttribute('height', '500px'); 
-
+                        genreLink.style = "margin-bottom:10px;"
                        
                         var colDiv = document.createElement('div');
                         colDiv.classList.add('col-12'); 

@@ -6,22 +6,23 @@ function getQueryParam(name) {
 }
 
 var gameId = getQueryParam('id');
-console.log('Game ID:', gameId);  
+console.log('Game ID:', gameId); // Check if gameId is correctly obtained from the URL
 if (!gameId) {
     console.error('Game ID was not found in the URL');
 
 } else {
-  
+    // Function to fetch game data
     function fetchGameData() {
-        xhr.open('GET', 'https:gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
+        xhr.open('GET', 'https://gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
-                    console.log('Server Response:', data); 
+                    console.log('Server Response:', data); // Check the server response
                     var dados = data;
-                
+                    // Access the header_image URL from the data object
                     var headerImage = dados.header_image;
-                    console.log('Header Image URL:', headerImage); 
+                    console.log('Header Image URL:', headerImage); // Check if headerImage is correctly obtained
                     var image = document.getElementById('mainImg');
                     var nome = document.querySelector("#nome1");
                     var nome1 = document.querySelector("#nome2");
@@ -33,7 +34,7 @@ if (!gameId) {
                     if (dados.price_overview && dados.price_overview.final_formatted) {
                         price.textContent = dados.price_overview.final_formatted;
                     } else {
-                         
+                        // Retry fetching the data
                         if (retryCount < maxRetries) {
                             retryCount++;
                             console.log('Retry:', retryCount);
@@ -41,7 +42,8 @@ if (!gameId) {
                             return;
                         } else {
                             console.error('Max retries reached, final_formatted not available');
-                          
+                            // You can handle this scenario, for example, redirecting or displaying an error message
+                            // For now, let's refresh the page
                             location.reload();
                         }
                     }
@@ -53,7 +55,7 @@ if (!gameId) {
                     //Géneros
                     var container = document.getElementById('genresContainer');
 
-                    var gameData = dados.genres;
+                    gameData = dados.genres;
 
                     gameData.forEach(function (genre) {
                         var genreLink = document.createElement('a');
@@ -65,7 +67,7 @@ if (!gameId) {
                     //TAGS
                     var container = document.getElementById('tagsmm');
 
-                    var gameCate = dados.categories;
+                    gameCate = dados.categories;
 
                     gameCate.forEach(function (genre) {
                         var genreLink = document.createElement('a');
@@ -76,7 +78,7 @@ if (!gameId) {
 
 
                     //Screenshots
-                    var gamescre = dados.screenshots;
+                    gamescre = dados.screenshots;
                     var reviews = document.querySelector("#reviews")
                     gamescre.forEach(function (genre) {
                         var genreLink = document.createElement('img');
@@ -85,11 +87,11 @@ if (!gameId) {
                         genreLink.style = "margin-bottom:10px;"
                     });
 
-                     //BOTAO COMPRAR NA STEAM
+                    // BOTAO COMPRAR NA STEAM
                     var botaosteam = document.querySelector("#ir_steam");
                     botaosteam.addEventListener('click', function (event) {
-                        event.preventDefault();  
-                        window.location.href = "https:store.steampowered.com/app/" + gameId;
+                        event.preventDefault(); // Prevent the default behavior of the button
+                        window.location.href = "https://store.steampowered.com/app/" + gameId;
                     });
 
 
@@ -123,19 +125,23 @@ if (!gameId) {
                     });
                     
                     trailers.appendChild(rowDiv);
-              
+                } else {
+                    console.error('Error fetching game details:', xhr.status);
+
+
+                }
             }
         };
 
-         
+        // Send the request
         xhr.send();
     }
 
     var retryCount = 0;
-    var maxRetries = 5;  //Maximum number of retries
-    var retryInterval = 1000;  //Retry interval in milliseconds
+    var maxRetries = 5; // Maximum number of retries
+    var retryInterval = 1000; // Retry interval in milliseconds
 
-     //Start fetching game data
+    // Start fetching game data
     fetchGameData();
 }
 

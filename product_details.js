@@ -34,18 +34,7 @@ if (!gameId) {
                     if (dados.price_overview && dados.price_overview.final_formatted) {
                         price.textContent = dados.price_overview.final_formatted;
                     } else {
-                        // Retry fetching the data
-                        if (retryCount < maxRetries) {
-                            retryCount++;
-                            console.log('Retry:', retryCount);
-                            setTimeout(fetchGameData, retryInterval);
-                            return;
-                        } else {
-                            console.error('Max retries reached, final_formatted not available');
-                            // You can handle this scenario, for example, redirecting or displaying an error message
-                            // For now, let's refresh the page
-                            location.reload();
-                        }
+                 
                     }
                     aboutgame.innerHTML = dados.about_the_game;
                     id_game.textContent = gameId;

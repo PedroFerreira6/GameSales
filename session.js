@@ -38,7 +38,7 @@ if (uid) {
         window.location.href = './index.html';
     })
     var favlink=document.getElementById('favlink')
-    favlink.setAttribute()
+    
 
 } else {
     console.log("User is not logged in");

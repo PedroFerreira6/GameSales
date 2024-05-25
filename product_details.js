@@ -16,7 +16,6 @@ if (!gameId) {
         xhr.open('GET', 'https:gamesales-production.up.railway.app/getGameDetails/' + gameId, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText);
                     console.log('Server Response:', data); 
                     var dados = data;
@@ -124,11 +123,7 @@ if (!gameId) {
                     });
                     
                     trailers.appendChild(rowDiv);
-                } else {
-                    console.error('Error fetching game details:', xhr.status);
-
-
-                }
+              
             }
         };
 

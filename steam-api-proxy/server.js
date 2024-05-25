@@ -10,7 +10,7 @@ app.use(cors());
 app.get('/getGameDetails/:gameId', async (req, res) => {
   const gameId = req.params.gameId;
   try {
-    const response = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${gameId}&l=portuguese`);
+    const response = await axios.get(`https://store.steampowered.com/api/appdetails?appids=${gameId}`);
     
     // Check if the response contains data for the specified game ID
     if (response.data && response.data[gameId] && response.data[gameId].success) {

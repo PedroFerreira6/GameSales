@@ -14,7 +14,6 @@ xhr.onreadystatechange = function () {
       data.new_releases.items.forEach(function (item) {
         if (uniqueGameIds.has(item.id)) return; // Skip if this game ID has already been processed
         uniqueGameIds.add(item.id); // Add the game ID to the set of processed IDs
-
         // Create the column div
         var colDiv = document.createElement('div');
         // Define the order of classes

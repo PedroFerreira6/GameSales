@@ -11,6 +11,8 @@ function getUserData(uid) {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 const userData = snapshot.val();
+                var liname=document.getElementById('username')
+                liname.text=userData.name
                 console.log("User Data:", userData); // Display user data
             } else {
                 console.error("User data not found for UID:", uid);
@@ -37,13 +39,17 @@ if (uid) {
         // Redirect to login page
         window.location.href = './index.html';
     })
+  
     var favlink=document.getElementById('favlink')
     
-
 } else {
     console.log("User is not logged in");
     var favli=document.getElementById('lilink');
     var favlink=document.getElementById('favlink')
     favlink.setAttribute('href',"");
     favli.innerHTML=" "
+
+    var linick=document.getElementById('linick');
+    var liname=document.getElementById('username')
+    linick.innerHTML=" "
 }
